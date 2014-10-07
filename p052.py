@@ -15,16 +15,21 @@ common.assertEquals(digits(125874), digits(251748))
 
 def same_digits_as_multiples(x, multiples):
   d = digits(x)
+
+  # duplicate digits are implicitly forbidden
+  if len(d) != len(str(x)): return False
+
   for i in multiples:
     if d != digits(i*x):
       return False
   return True
 
 common.assertEquals(True, same_digits_as_multiples(125874, [2]))
+common.assertEquals(False, same_digits_as_multiples(123456, [2]))
 
 def euler052():
   multiples = range(2,7)
-  for i in itertools.count(1):
+  for i in itertools.count(10**5):  # solution must have at least 6 digits
     if same_digits_as_multiples(i, multiples):
       return i
 
