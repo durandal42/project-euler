@@ -156,9 +156,6 @@ def wordvalue(w):
 
 assertEquals(53, wordvalue('COLIN'))
 
-def c(n,r):
-  return math.factorial(n) / math.factorial(r) / math.factorial(n-r)
-
 def gcd(a, b):
     while b:
        b, a = a % b, b
