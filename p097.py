@@ -1,0 +1,2 @@
+MODULUS = 10**10
+print (28433 * pow(2, 7830457, MODULUS) + 1) % MODULUS
