@@ -15,7 +15,8 @@ Let us list the factors of the first seven triangle numbers:
 
 We can see that 28 is the first triangle number to have over five divisors.
 
-What is the value of the first triangle number to have over five hundred divisors?
+What is the value of the first triangle number to have over five hundred
+divisors?
 '''
 
 import common
@@ -26,7 +27,8 @@ def euler012(num_divisors):
     # the formula for the nth triangle number is n*(n+1)/2.
     # 
     # n and n+1 must be mutually prime, one of them must be even, and
-    # they will still be mutually prime after the even one has been divided by 2.
+    # they will still be mutually prime after the even one has been divided
+    # by 2.
     # 
     # if a*b=c, and a,b are mutually prime, then
     #   num_divisors(c) = num_divisors(a) * num_divisors(b)

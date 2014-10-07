@@ -40,4 +40,4 @@ def euler047(n):
 common.assertEquals(14, euler047(2))
 common.assertEquals(644, euler047(3))
 
-common.submit(euler047(4), expected=134043)  # final submission, with post-hoc test
+common.submit(euler047(4), expected=134043)
