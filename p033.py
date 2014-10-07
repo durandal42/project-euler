@@ -27,16 +27,16 @@ for a in range(10):
   for b in range(10):
     for c in range(1,10):
       if cancels(10*a + c, b + 10*c, a, b):
-        print '%d%d/%d%d = %d/%d' %(a,c,c,b,a,b)
+        print 'found a curious fraction: %d%d/%d%d = %d/%d' %(a,c,c,b,a,b)
         n *= a
         d *= b
           
-print '%d/%d' % (n,d)
+print 'product of curious fractions: %d/%d' % (n,d)
 
 gcd = common.gcd(n,d)
 n /= gcd
 d /= gcd
 
-print '%d/%d' % (n,d)
+print 'reduced product: %d/%d' % (n,d)
 
 common.submit(d, expected=100)
