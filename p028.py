@@ -46,7 +46,7 @@ def euler028(size):
 #   and check it against the fifth.
 import numpy
 import fractions
-def find_closed_form(f, data, test=[], hardcode=False):
+def find_closed_form(f, data, test=[]):
   coefficients = numpy.polyfit(data, map(f, data), 3)
   rational_coefficients = [fractions.Fraction(c).limit_denominator() for c in coefficients]
   print rational_coefficients
