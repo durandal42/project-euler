@@ -19,7 +19,7 @@ clever method! ;o)
 
 import common
 
-DATA = '''
+RAW_DATA = '''
 75
 95 64
 17 47 82
@@ -37,22 +37,60 @@ DATA = '''
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23
 '''
 
-def euler018(raw_data):
-  data = [[int(number) for number in line.split(" ")]
-          for line in raw_data.strip().split('\n')]
 
-  while len(data) > 1:
-    last = data.pop()
-    data.append([p + max(last[i], last[i+1]) for i,p in enumerate(data.pop())])
+def parse(raw_data):
+  '''Parse text data into a tuple of tuples.
 
-  return data[0][0]
+  Why tuples?
+  1) Lists are mutable, which permitted an earlier version to destructively
+     modify the data, which wasn't a problem for itself, but made it awkward to
+     run multiple algorithms on the same data.
+  2) Tuples are immutable, so they're hashable, so they can be used in memoization.
+  '''
+  return tuple(tuple(int(number) for number in line.split(" "))
+               for line in raw_data.strip().split('\n'))
 
-TEST_DATA = '''
+DATA = parse(RAW_DATA)
+
+
+def euler018_dp(data):
+  '''Dynamic programming.'''
+  last = data[-1]
+  for i in reversed(range(len(data) - 1)):
+    last = tuple(p + max(last[j], last[j + 1]) for j, p in enumerate(data[i]))
+
+  return last[0]
+
+
+def euler018_brute(data, i=0, j=0):
+  '''Easy, but far too slow on larger data.'''
+  if i >= len(data):
+    return 0
+  return data[i][j] + max(euler018_brute(data, i + 1, j),
+                          euler018_brute(data, i + 1, j + 1))
+
+
+@common.memoized
+def euler018_memoized(data, i=0, j=0):
+  '''Just memoize the brute force solution.
+
+  This is awkward, because the data itself has to be stored with each
+  memoized call. :(
+  '''
+  if i >= len(data):
+    return 0
+  return data[i][j] + max(euler018_memoized(data, i + 1, j),
+                          euler018_memoized(data, i + 1, j + 1))
+
+# Which algorithm to use:
+euler018 = euler018_dp
+
+TEST_DATA = parse('''
 3
 7 4
 2 4 6
 8 5 9 3
-'''
+''')
 common.assertEquals(23, euler018(TEST_DATA))
 
 common.submit(euler018(DATA), expected=1074)
