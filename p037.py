@@ -26,7 +26,7 @@ def left_truncatable(n):
   return True
 
 def truncatable(n):
-  return n >= 10 and left_truncatable(n) and right_truncatable(n)
+  return n >= 10 and left_truncatable(int(str(n)[1:])) and right_truncatable(n/10) and common.prime(n)
 
 common.assertEquals(True, truncatable(3797))
 common.assertEquals(False, truncatable(3))
