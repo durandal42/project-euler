@@ -14,11 +14,13 @@ Evaluate the sum of all the amicable numbers under 10000.
 
 import common
 
+
 def sum_proper_divisors(n):
   return sum(common.divisors(n)) - n
 
 common.assertEquals(284, sum_proper_divisors(220))
 common.assertEquals(220, sum_proper_divisors(284))
+
 
 def amicable(n):
   other = sum_proper_divisors(n)
@@ -31,5 +33,5 @@ common.assertEquals(False, amicable(12))
 # perfect numbers are not amicable with themselves
 common.assertEquals(False, amicable(6))
 
-total = sum(i for i in range(1,10001) if amicable(i))
+total = sum(i for i in range(1, 10001) if amicable(i))
 common.submit(total, expected=31626)
